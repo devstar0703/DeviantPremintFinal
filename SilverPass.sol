@@ -92,20 +92,20 @@ contract SilverPass is ERC721, ERC721URIStorage, EIP712, AccessControl {
         }
 
         if(block.timestamp <= openSeason){
-        require(
-            _verify(signature),
-            "Invalid signature"
-        );
+            require(
+                _verify(signature),
+                "Invalid signature"
+            );
 
 
-        assert(msg.sender == account);
-        safeMint(account, amount);
-        return true;
+            assert(msg.sender == account);
+            safeMint(account, amount);
+            return true;
 
-        }else if(block.timestamp > openSeason){
+        } else if(block.timestamp > openSeason){
             safeMint(account,amount);
             return true;
-        }else{
+        } else{
             revert AllSoldOut();
         }
     }
@@ -135,7 +135,7 @@ contract SilverPass is ERC721, ERC721URIStorage, EIP712, AccessControl {
     /// @param to it can be any EOA
     function safeMint(address to, uint amount)
         internal
-    {
+    { 
         for(uint x = amount; x > 0; x--){
             uint id = _tokenIdCounter.current();
             _tokenIdCounter.increment();
@@ -160,7 +160,7 @@ contract SilverPass is ERC721, ERC721URIStorage, EIP712, AccessControl {
                 revert NonZeroOnly();
             }
 
-            safeMint(addrs[x],amounts[x]);
+            safeMint(addrs[x], amounts[x]);
             // emit Airdropped(_tokenIdCounter.curren() - 1, addrs[x]);
         }
     }

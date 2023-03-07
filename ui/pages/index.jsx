@@ -869,7 +869,7 @@ export default function Home() {
 	async function handleMint(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		console.log(premintInstance)
+		console.log(premintInstance);
 		if(selectedAmount == 2) {
 		let costCharge = 3500000000000000
 		let receipt = await premintInstance.redeem(account.address, selectedAmount, hash, {value: costCharge});
